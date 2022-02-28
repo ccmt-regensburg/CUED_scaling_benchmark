@@ -1,0 +1,65 @@
+% This file was created by tikzplotlib v0.9.8.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.52156862745098,0,0.56078431372549}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.97)},
+  anchor=north west,
+  draw=white!80!black
+},
+log basis x={10},
+log basis y={10},
+tick align=outside,
+tick pos=left,
+x grid style={white!69.0196078431373!black},
+xlabel={Number of cores},
+xmajorgrids,
+xmin=67.8822509939086, xmax=139022.850035525,
+xmode=log,
+xtick style={color=black},
+xticklabel style={rotate=20.0},
+y grid style={white!69.0196078431373!black},
+ylabel={Relative speedup},
+ymajorgrids,
+ymin=0.784584097896751, ymax=163.143760296865,
+ymode=log,
+ytick style={color=black},
+ytick={1,2,4,8,16,32,64,128},
+yticklabels={1,2,4,8,16,32,64,128}
+]
+\addplot [semithick, color0, mark=*, mark size=3, mark options={solid}]
+table {%
+96 1
+192 1.98664178371476
+384 3.96873569232782
+768 7.95464079706345
+1536 14.2470063395163
+3072 27.4561085972851
+6144 50.7765690376569
+12288 71.1348182883939
+24576 101.13
+49152 120.632206759443
+98304 87.6849710982659
+};
+\addlegendentry{CUED}
+\addplot [semithick, green!74.9019607843137!black]
+table {%
+75.3200733980881 0.784584097896751
+15661.8009884991 163.143760296865
+};
+\addlegendentry{ideal}
+\end{axis}
+
+\draw ({$(current bounding box.south west)!0.5!(current bounding box.south east)$}|-{$(current bounding box.south west)!0.98!(current bounding box.north west)$}) node[
+  scale=1.08,
+  anchor=north,
+  text=black,
+  rotate=0.0
+]{Scaling of CUED};
+\end{tikzpicture}

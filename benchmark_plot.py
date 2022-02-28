@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import NullLocator,LogLocator
 from matplotlib.colors import to_hex
-import matplotlib.font_manager
+import tikzplotlib
 
 plt.rcParams["text.usetex"] = False
 plt.rcParams["font.size"] = 18
@@ -45,3 +45,4 @@ fig.suptitle(f"Scaling of CUED")
 ax.grid(linestyle="--")
 fig.tight_layout()
 plt.savefig("Benchmark_SNG.png")
+tikzplotlib.save("Benchmark_SNG.tikz")
