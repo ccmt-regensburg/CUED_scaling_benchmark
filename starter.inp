@@ -1,0 +1,48 @@
+#!/bin/bash
+
+PHASENUM=768
+FREQMULT=20
+CORESperNODE=48
+
+PHASEMAX="2*np.pi"
+CHIRP_MAX="2.8"
+CHIRP_NUM=57
+
+echo Phasenum is $PHASENUM
+echo FREQMULT is $FREQMULT
+echo maximum of chirps is $CHIRP_MAX
+echo Spacing between chirps is $CHIRP_STEP
+echo CHIRP_NUM is $CHIRP_NUM
+echo We use $CORESperNODE Cores per node
+
+NODE_MULT=$((($PHASENUM*$CHIRP_NUM)/$CORESperNODE))
+#NODE_MULT=232 #Please calculate this number by yourself, as bash cant handle floats ($PHASENUM*$CHIRP_NUM)/$CORESperNODE
+
+echo We use nodes: $NODE_MULT
+echo debug
+echo $FREQMULT
+
+mkdir increasedkgrid_freqmult_"$FREQMULT"_phasenum_"$PHASENUM"_chirpnum_"$CHIRP_NUM"
+cd    increasedkgrid_freqmult_"$FREQMULT"_phasenum_"$PHASENUM"_chirpnum_"$CHIRP_NUM"
+ 
+ cp ../Cued_slurm_runscript.slurm .
+ cp ../runscript.py .
+ cp ../params.py .
+
+ sed -i -e 's/Node_Mult_REPLACE/'$NODE_MULT'/g' Cued_slurm_runscript.slurm
+
+
+ sed -i -e 's/CHIRP_MAX/'$CHIRP_MAX'/g' runscript.py
+# sed -i -e 's/CHIRP_STEP/'$CHIRP_STEP'/g' runscript.py
+ sed -i -e 's/CHIRP_NUM/'$CHIRP_NUM'/g' runscript.py
+
+ sed -i -e 's/PHASENUM/'$PHASENUM'/g' runscript.py
+ sed -i -e 's/PHASEMAX/'$PHASEMAX'/g' runscript.py
+# sed -i -e 's/ChirpREPLACE/'$CHIRP'/g' params.py
+ sed -i -e 's/freqmultREPLACE/'$FREQMULT'/g' params.py
+
+ mkdir init
+ cp * init
+ sbatch *.slurm
+ sleep 2
+ cd ..
