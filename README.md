@@ -6,5 +6,5 @@ After these have finished, the slurm_cleanup.py, envoked in the main directory, 
 in order to reduce the upload size of the files (the full slurm.out as well as time- and frequency_data.dat are ignored by .gitignore due to memory constraints).
 Furthermore, a csv is created with the number of _**nodes**_ (not cores!) and the runtime in seconds.
 
-At last, the benchmark_plot.py reads the csv, prints the overall computational time and creates a png and tikz file with the 
+At last, the benchmark_plot.py reads the csv, prints the overall computational time (around 45k coreh) and creates a png and tikz file with the 
 relative speedup against number of nodes/cores.
